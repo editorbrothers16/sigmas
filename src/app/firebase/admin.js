@@ -7,9 +7,7 @@ if (!process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
   throw new Error("The FIREBASE_SERVICE_ACCOUNT_JSON environment variable is not set.");
 }
 
-const serviceAccount = JSON.parse(
-  Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_JSON, 'base64').toString('utf-8')
-);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)
 
 if (!admin.apps.length) {
   admin.initializeApp({

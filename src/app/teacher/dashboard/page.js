@@ -36,7 +36,7 @@ export default function TeacherDashboardPage() {
                     setLoading(false);
                 }
             } else {
-                router.push('/auth');
+                router.push('/teacher');
             }
         });
         return () => unsubscribe();
@@ -67,7 +67,7 @@ export default function TeacherDashboardPage() {
                 },
                 body: JSON.stringify({
                     presentStudentUids: Array.from(presentUids),
-                    teacherName: user.email.split('@')[0] // Example teacher name
+                    teacherName: user.displayName // Example teacher name
                 }),
             });
             const result = await response.json();
@@ -81,7 +81,7 @@ export default function TeacherDashboardPage() {
 
     const handleLogout = async () => {
         await signOut(auth);
-        router.push('/auth');
+        router.push('/teacher');
     };
 
     if (loading) return <LoadingSpinner />;
@@ -107,9 +107,9 @@ export default function TeacherDashboardPage() {
 
             <div className="space-y-3 max-h-96 overflow-y-auto pr-4">
                 {students.map(student => (
-                    <div key={student.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg shadow-sm">
+                    <div key={student.id} className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 rounded-lg shadow-sm">
                         <div>
-                            <p className="font-semibold text-gray-800">{student.name}</p>
+                            <p className="font-semibold text-center md:text-left text-gray-800">{student.name}</p>
                             <p className="text-sm text-gray-500">{student.email}</p>
                         </div>
                         <div className="flex items-center space-x-3">
